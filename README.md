@@ -8,7 +8,7 @@ dependency lists. The c directory contains a makefile configured for C.
 ## Features
 * Automatically finds and compiles all source files within the source directory.
 * Compiles most recently modified files first, to hopefully find problems earlier.
-* Automatically generates dependecies as files are compiled, ensuring that files are correctly recompiled when dependecies have updated.
+* Automatically generates dependencies as files are compiled, ensuring that files are correctly recompiled when dependencies have updated.
 * Includes configurations for normal (release) build and debug build suitable for GDB debugging.
 * Times the compilation of each file and the entire build.
 * Generates version numbers based on git tags (see below), which are passed the compiler as preprocessor macros.
@@ -20,7 +20,7 @@ Tags should be made in the format `vMAJOR.MINOR.PATCH[-description]`, where `MAJ
 * `VERSION_MINOR (int)` - The minor version number from the most recent tag.
 * `VERSION_PATCH (int)` - The patch version number from the most recent tag.
 * `VERSION_REVISION (int)` - The number of commits since the most recent tag.
-* `VERSION_HASH (string)` - The SHA of the current commit. Includes the "-dirty" suffix if there are uncommited changes.
+* `VERSION_HASH (string)` - The SHA of the current commit. Includes the "-dirty" suffix if there are uncommitted changes.
 
 If the makefile is not used in a git repository, or is in a repository with no tags, the version macros are not created.
 
