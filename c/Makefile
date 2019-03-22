@@ -111,28 +111,29 @@ else
 endif
 
 # Version macros
-# Comment/remove this section to remove versioning
 USE_VERSION := false
-# If this isn't a git repo or the repo has no tags, git describe will return non-zero
-ifeq ($(shell git describe --always > /dev/null 2>&1 ; echo $$?), 0)
-	USE_VERSION := true
-	VERSION := $(shell git describe --tags --long --dirty --always)
-	VERSION_MAJOR := $(shell echo $(VERSION) | \
-		sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\2/')
-	VERSION_MINOR := $(shell echo $(VERSION) | \
-		sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\4/')
-	VERSION_PATCH := $(shell echo $(VERSION) | \
-		sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\6/')
-	VERSION_REVISION := $(shell echo $(VERSION) | \
-		sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\8/')
-	VERSION_HASH := $(shell echo $(VERSION) | \
-		sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\9/')
-	override CFLAGS := $(CFLAGS) \
-		-D VERSION_MAJOR=$(VERSION_MAJOR) \
-		-D VERSION_MINOR=$(VERSION_MINOR) \
-		-D VERSION_PATCH=$(VERSION_PATCH) \
-		-D VERSION_REVISION=$(VERSION_REVISION) \
-		-D VERSION_HASH=\"$(VERSION_HASH)\"
+ifneq (,$(findstring debug,$(BUILD_PATH)))
+	# If this isn't a git repo or the repo has no tags, git describe will return non-zero
+	ifeq ($(shell git describe --always > /dev/null 2>&1 ; echo $$?), 0)
+		USE_VERSION := true
+		VERSION := $(shell git describe --tags --long --dirty --always)
+		VERSION_MAJOR := $(shell echo $(VERSION) | \
+			sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\2/')
+		VERSION_MINOR := $(shell echo $(VERSION) | \
+			sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\4/')
+		VERSION_PATCH := $(shell echo $(VERSION) | \
+			sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\6/')
+		VERSION_REVISION := $(shell echo $(VERSION) | \
+			sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\8/')
+		VERSION_HASH := $(shell echo $(VERSION) | \
+			sed -r 's/^(v?([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?(-.*)?\-([0-9]+)\-)?g?([0-9a-f]{7}.*)$$/\9/')
+		override CFLAGS := $(CFLAGS) \
+			-D VERSION_MAJOR=$(VERSION_MAJOR) \
+			-D VERSION_MINOR=$(VERSION_MINOR) \
+			-D VERSION_PATCH=$(VERSION_PATCH) \
+			-D VERSION_REVISION=$(VERSION_REVISION) \
+			-D VERSION_HASH=\"$(VERSION_HASH)\"
+	endif
 endif
 
 # Standard, non-optimized release build
