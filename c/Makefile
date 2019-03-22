@@ -151,7 +151,7 @@ else
 	@echo "Beginning release build"
 endif
 	@$(START_TIME)
-	@$(MAKE) all --no-print-directory
+	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -164,7 +164,7 @@ else
 	@echo "Beginning debug build"
 endif
 	@$(START_TIME)
-	@$(MAKE) all --no-print-directory
+	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -197,7 +197,8 @@ clean:
 	@$(RM) -r bin
 
 # Main rule, checks the executable and symlinks to the output
-all: $(BIN_PATH)/$(BIN_NAME)
+.PHONY: main
+main: $(BIN_PATH)/$(BIN_NAME)
 	@echo "Making symlink: $(BIN_NAME) -> $<"
 	@$(RM) $(BIN_NAME)
 	@ln -s $(BIN_PATH)/$(BIN_NAME) $(BIN_NAME)
