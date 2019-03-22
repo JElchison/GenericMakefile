@@ -23,10 +23,6 @@ LINK_FLAGS =
 RLINK_FLAGS =
 # Additional debug-specific linker settings
 DLINK_FLAGS =
-# Destination directory, like a jail or mounted system
-DESTDIR = /
-# Install path (bin/ is appended automatically)
-INSTALL_PREFIX = usr/local
 #### END PROJECT SETTINGS ####
 
 # Optionally you may move the section above to a separate config.mk file, and
@@ -48,10 +44,6 @@ print-%: ; @echo $*=$($*)
 SHELL = /bin/bash
 # Clear built-in rules
 .SUFFIXES:
-# Programs for installation
-INSTALL = install
-INSTALL_PROGRAM = $(INSTALL)
-INSTALL_DATA = $(INSTALL) -m 644
 
 # Append pkg-config specific libraries if need be
 ifneq ($(LIBS),)
@@ -77,7 +69,6 @@ release: export BUILD_PATH := build/release
 release: export BIN_PATH := bin/release
 debug: export BUILD_PATH := build/debug
 debug: export BIN_PATH := bin/debug
-install: export BIN_PATH := bin/release
 
 # Find all source files in the source directory, sorted by most
 # recently modified
@@ -176,18 +167,6 @@ dirs:
 	@echo "Creating directories"
 	@mkdir -p $(dir $(OBJECTS))
 	@mkdir -p $(BIN_PATH)
-
-# Installs to the set path
-.PHONY: install
-install:
-	@echo "Installing to $(DESTDIR)$(INSTALL_PREFIX)/bin"
-	@$(INSTALL_PROGRAM) $(BIN_PATH)/$(BIN_NAME) $(DESTDIR)$(INSTALL_PREFIX)/bin
-
-# Uninstalls the program
-.PHONY: uninstall
-uninstall:
-	@echo "Removing $(DESTDIR)$(INSTALL_PREFIX)/bin/$(BIN_NAME)"
-	@$(RM) $(DESTDIR)$(INSTALL_PREFIX)/bin/$(BIN_NAME)
 
 # Removes all build files
 .PHONY: clean
