@@ -78,16 +78,24 @@ ifeq ($(V),true)
 endif
 
 # Combine compiler and linker flags
-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(RCOMPILE_FLAGS)
-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(RLINK_FLAGS)
-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(DCOMPILE_FLAGS)
-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(DLINK_FLAGS)
+64-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(RCOMPILE_FLAGS)
+64-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(RLINK_FLAGS)
+64-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DCOMPILE_FLAGS)
+64-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DLINK_FLAGS)
+32-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(RCOMPILE_FLAGS)
+32-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(RLINK_FLAGS)
+32-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DCOMPILE_FLAGS)
+32-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DLINK_FLAGS)
 
 # Build and output paths
-release: export BUILD_PATH := build/release
-release: export BIN_PATH := bin/release
-debug: export BUILD_PATH := build/debug
-debug: export BIN_PATH := bin/debug
+64-release: export BUILD_PATH := build/64/release
+64-release: export BIN_PATH := bin/64/release
+64-debug: export BUILD_PATH := build/64/debug
+64-debug: export BIN_PATH := bin/64/debug
+32-release: export BUILD_PATH := build/32/release
+32-release: export BIN_PATH := bin/32/release
+32-debug: export BUILD_PATH := build/32/debug
+32-debug: export BIN_PATH := bin/32/debug
 
 # Find all source files in the source directory, sorted by most
 # recently modified
@@ -155,26 +163,52 @@ ifneq (,$(findstring debug,$(BUILD_PATH)))
 	endif
 endif
 
-# Standard, non-optimized release build
-.PHONY: release
-release: dirs
+# 64-bit release build
+.PHONY: 64-release
+64-release: dirs
 ifeq ($(USE_VERSION), true)
-	@echo "Beginning release build v$(VERSION)"
+	@echo "Beginning 64-bit release build $(VERSION)"
 else
-	@echo "Beginning release build"
+	@echo "Beginning 64-bit release build"
 endif
 	@$(START_TIME)
 	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
-# Debug build for gdb debugging
-.PHONY: debug
-debug: dirs
+# 64-bit debug build
+.PHONY: 64-debug
+64-debug: dirs
 ifeq ($(USE_VERSION), true)
-	@echo "Beginning debug build v$(VERSION)"
+	@echo "Beginning 64-bit debug build $(VERSION)"
 else
-	@echo "Beginning debug build"
+	@echo "Beginning 64-bit debug build"
+endif
+	@$(START_TIME)
+	@$(MAKE) main --no-print-directory
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 32-bit release build
+.PHONY: 32-release
+32-release: dirs
+ifeq ($(USE_VERSION), true)
+	@echo "Beginning 32-bit release build $(VERSION)"
+else
+	@echo "Beginning 32-bit release build"
+endif
+	@$(START_TIME)
+	@$(MAKE) main --no-print-directory
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 32-bit debug build
+.PHONY: 32-debug
+32-debug: dirs
+ifeq ($(USE_VERSION), true)
+	@echo "Beginning 32-bit debug build $(VERSION)"
+else
+	@echo "Beginning 32-bit debug build"
 endif
 	@$(START_TIME)
 	@$(MAKE) main --no-print-directory
