@@ -246,6 +246,10 @@ main: $(BIN_PATH)/$(BIN_NAME)
 check:
 	@cppcheck --enable=all --std=$(CSTD) .
 
+.PHONY: indent
+indent:
+	@indent -kr $(SOURCES)
+
 # Link the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 	@echo "Linking: $@"
