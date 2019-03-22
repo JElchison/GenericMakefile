@@ -2,27 +2,46 @@
 # The name of the executable to be created
 BIN_NAME := hello
 # Compiler used
-CC ?= gcc
+CC = gcc
+# C standard
+CSTD = c99
 # Extension of source files used in the project
 SRC_EXT = c
 # Path to the source directory, relative to the makefile
 SRC_PATH = .
 # Space-separated pkg-config libraries used by this project
 LIBS =
-# General compiler flags
-COMPILE_FLAGS = -std=c99 -Wall -Wextra -g
-# Additional release-specific flags
-RCOMPILE_FLAGS = -D NDEBUG
-# Additional debug-specific flags
-DCOMPILE_FLAGS = -D DEBUG
 # Add additional include paths
 INCLUDES = -I $(SRC_PATH)
+
+# General compiler flags
+COMPILE_FLAGS = -std=$(CSTD) -Wall -Wextra -Werror -pedantic \
+    -Wno-missing-braces -Wno-missing-field-initializers -Wformat=2 \
+    -Wswitch-default -Wswitch-enum -Wcast-align -Wpointer-arith \
+    -Wbad-function-cast -Wstrict-overflow=5 -Wstrict-prototypes -Winline \
+    -Wundef -Wnested-externs -Wcast-qual -Wshadow -Wunreachable-code \
+    -Wlogical-op -Wfloat-equal -Wstrict-aliasing=2 -Wredundant-decls \
+    -Wold-style-definition -Wmissing-prototypes \
+    -fno-common -fstrict-aliasing
+# 64-bit compiler flags
+BIT64_COMPILE_FLAGS = -m64
+# 32-bit compiler flags
+BIT32_COMPILE_FLAGS = -m32
+# Additional release-specific flags
+RCOMPILE_FLAGS = -D NDEBUG -Os -flto
+# Additional debug-specific flags
+DCOMPILE_FLAGS = -D DEBUG -O0 -ggdb3 -fno-omit-frame-pointer
+
 # General linker settings
 LINK_FLAGS =
+# 64-bit linker flags
+BIT64_LINK_FLAGS = -m64
+# 32-bit linker flags
+BIT32_LINK_FLAGS = -m32
 # Additional release-specific linker settings
-RLINK_FLAGS =
+RLINK_FLAGS = -s -flto
 # Additional debug-specific linker settings
-DLINK_FLAGS =
+DLINK_FLAGS = -lmcheck
 #### END PROJECT SETTINGS ####
 
 # Optionally you may move the section above to a separate config.mk file, and
