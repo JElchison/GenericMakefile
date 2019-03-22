@@ -172,6 +172,7 @@ else
 	@echo "Beginning 64-bit release build"
 endif
 	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -185,6 +186,7 @@ else
 	@echo "Beginning 64-bit debug build"
 endif
 	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -198,6 +200,7 @@ else
 	@echo "Beginning 32-bit release build"
 endif
 	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -211,6 +214,7 @@ else
 	@echo "Beginning 32-bit debug build"
 endif
 	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -237,6 +241,10 @@ main: $(BIN_PATH)/$(BIN_NAME)
 	@echo "Making symlink: $(BIN_NAME) -> $<"
 	@$(RM) $(BIN_NAME)
 	@ln -s $(BIN_PATH)/$(BIN_NAME) $(BIN_NAME)
+
+.PHONY: check
+check:
+	@cppcheck --enable=all --std=$(CSTD) .
 
 # Link the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
