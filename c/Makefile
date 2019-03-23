@@ -28,9 +28,9 @@ BIT64_COMPILE_FLAGS = -m64
 # 32-bit compiler flags
 BIT32_COMPILE_FLAGS = -m32
 # Additional release-specific flags
-RCOMPILE_FLAGS = -D NDEBUG -Os -flto
+RCOMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto
 # Additional debug-specific flags
-DCOMPILE_FLAGS = -D DEBUG -O0 -ggdb3 -fno-omit-frame-pointer
+DCOMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -fno-omit-frame-pointer
 
 # General linker settings
 LINK_FLAGS =
