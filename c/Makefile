@@ -17,7 +17,7 @@ INCLUDES = -I $(SRC_PATH)
 
 # General compiler flags
 COMPILE_FLAGS = -std=$(CSTD_GCC) -Wall -Wextra -Werror -pedantic \
-    -Wno-missing-braces -Wno-missing-field-initializers -Wformat=2 \
+    -Wformat=2 \
     -Wswitch-default -Wswitch-enum -Wcast-align -Wpointer-arith \
     -Wbad-function-cast -Wstrict-overflow=5 -Wstrict-prototypes -Winline \
     -Wundef -Wnested-externs -Wcast-qual -Wshadow -Wunreachable-code \
