@@ -47,7 +47,7 @@ DYNAMIC_LINK_FLAGS =
 # Additional static linker settings
 STATIC_LINK_FLAGS = -static
 # Additional release-specific linker settings
-RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto
+RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto -ffunction-sections -fdata-sections -Wl,--gc-sections
 # Additional debug-specific linker settings
 DEBUG_LINK_FLAGS = -lmcheck
 #### END PROJECT SETTINGS ####
