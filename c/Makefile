@@ -224,6 +224,10 @@ clean:
 	@$(RM) -r build
 	@$(RM) -r bin
 
+.PHONY: indent
+indent:
+	@indent -kr $(SOURCES)
+
 # Strip the binary, including the .comment section which normally contains the GCC version
 .PHONY: strip
 strip:
@@ -235,14 +239,6 @@ main: $(BIN_PATH)/$(BIN_NAME)
 	@echo "Making symlink: $(BIN_NAME) -> $< ..."
 	@$(RM) $(BIN_NAME)
 	@ln -s $(BIN_PATH)/$(BIN_NAME) $(BIN_NAME)
-
-.PHONY: check
-check:
-	@cppcheck --enable=all --std=$(CSTD) .
-
-.PHONY: indent
-indent:
-	@indent -kr $(SOURCES)
 
 # Link the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
@@ -264,3 +260,7 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	$(CMD_PREFIX)$(CC) $(CFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
 	@echo -en "\t Compile time: "
 	@$(END_TIME)
+
+.PHONY: check
+check:
+	@cppcheck --enable=all --std=$(CSTD) .
