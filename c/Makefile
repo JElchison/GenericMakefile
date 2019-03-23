@@ -39,7 +39,7 @@ BIT64_LINK_FLAGS = -m64
 # 32-bit linker flags
 BIT32_LINK_FLAGS = -m32
 # Additional release-specific linker settings
-RLINK_FLAGS = -s -flto
+RLINK_FLAGS = -s -Wl,--build-id=none -flto
 # Additional debug-specific linker settings
 DLINK_FLAGS = -lmcheck
 #### END PROJECT SETTINGS ####
