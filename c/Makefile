@@ -4,7 +4,8 @@ BIN_NAME := hello
 # Compiler used
 CC = gcc
 # C standard
-CSTD = c99
+CSTD_GCC = gnu11
+CSTD_CPPCHECK = c11
 # Extension of source files used in the project
 SRC_EXT = c
 # Path to the source directory, relative to the makefile
@@ -15,7 +16,7 @@ LIBS =
 INCLUDES = -I $(SRC_PATH)
 
 # General compiler flags
-COMPILE_FLAGS = -std=$(CSTD) -Wall -Wextra -Werror -pedantic \
+COMPILE_FLAGS = -std=$(CSTD_GCC) -Wall -Wextra -Werror -pedantic \
     -Wno-missing-braces -Wno-missing-field-initializers -Wformat=2 \
     -Wswitch-default -Wswitch-enum -Wcast-align -Wpointer-arith \
     -Wbad-function-cast -Wstrict-overflow=5 -Wstrict-prototypes -Winline \
@@ -331,5 +332,5 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 
 .PHONY: check
 check:
-	$(CMD_PREFIX)cppcheck --check-config --enable=all --std=$(CSTD) $(INCLUDES) .
-	$(CMD_PREFIX)cppcheck --enable=all --std=$(CSTD) $(INCLUDES) . | grep -v 'cannot find all the include files'
+	$(CMD_PREFIX)cppcheck --check-config --enable=all --std=$(CSTD_CPPCHECK) $(INCLUDES) .
+	$(CMD_PREFIX)cppcheck --enable=all --std=$(CSTD_CPPCHECK) $(INCLUDES) . | grep -v 'cannot find all the include files'
