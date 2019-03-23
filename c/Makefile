@@ -167,11 +167,7 @@ endif
 # 64-bit release build
 .PHONY: 64-release
 64-release: dirs
-ifeq ($(USE_VERSION), true)
-	@echo "Beginning 64-bit release build $(VERSION)"
-else
-	@echo "Beginning 64-bit release build"
-endif
+	@echo "Beginning 64-bit release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
@@ -181,11 +177,7 @@ endif
 # 64-bit debug build
 .PHONY: 64-debug
 64-debug: dirs
-ifeq ($(USE_VERSION), true)
-	@echo "Beginning 64-bit debug build $(VERSION)"
-else
-	@echo "Beginning 64-bit debug build"
-endif
+	@echo "Beginning 64-bit debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
@@ -195,11 +187,7 @@ endif
 # 32-bit release build
 .PHONY: 32-release
 32-release: dirs
-ifeq ($(USE_VERSION), true)
-	@echo "Beginning 32-bit release build $(VERSION)"
-else
-	@echo "Beginning 32-bit release build"
-endif
+	@echo "Beginning 32-bit release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
@@ -209,11 +197,7 @@ endif
 # 32-bit debug build
 .PHONY: 32-debug
 32-debug: dirs
-ifeq ($(USE_VERSION), true)
-	@echo "Beginning 32-bit debug build $(VERSION)"
-else
-	@echo "Beginning 32-bit debug build"
-endif
+	@echo "Beginning 32-bit debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
