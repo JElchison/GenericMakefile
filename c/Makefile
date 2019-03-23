@@ -211,16 +211,16 @@ endif
 # Create the directories used in the build
 .PHONY: dirs
 dirs:
-	@echo "Creating directories"
+	@echo "Creating directories ..."
 	@mkdir -p $(dir $(OBJECTS))
 	@mkdir -p $(BIN_PATH)
 
 # Removes all build files
 .PHONY: clean
 clean:
-	@echo "Deleting $(BIN_NAME) symlink"
+	@echo "Deleting $(BIN_NAME) symlink ..."
 	@$(RM) $(BIN_NAME)
-	@echo "Deleting directories"
+	@echo "Deleting directories ..."
 	@$(RM) -r build
 	@$(RM) -r bin
 
@@ -232,7 +232,7 @@ strip:
 # Main rule, checks the executable and symlinks to the output
 .PHONY: main
 main: $(BIN_PATH)/$(BIN_NAME)
-	@echo "Making symlink: $(BIN_NAME) -> $<"
+	@echo "Making symlink: $(BIN_NAME) -> $< ..."
 	@$(RM) $(BIN_NAME)
 	@ln -s $(BIN_PATH)/$(BIN_NAME) $(BIN_NAME)
 
@@ -246,7 +246,7 @@ indent:
 
 # Link the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
-	@echo "Linking: $@"
+	@echo "Linking: $@ ..."
 	@$(START_TIME)
 	$(CMD_PREFIX)$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 	@echo -en "\t Link time: "
@@ -259,7 +259,7 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 # After the first compilation they will be joined with the rules from the
 # dependency files to provide header dependencies
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
-	@echo "Compiling: $< -> $@"
+	@echo "Compiling: $< -> $@ ..."
 	@$(START_TIME)
 	$(CMD_PREFIX)$(CC) $(CFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
 	@echo -en "\t Compile time: "
