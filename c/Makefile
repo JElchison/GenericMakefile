@@ -229,7 +229,7 @@ clean:
 strip:
 	$(CMD_PREFIX)strip --strip-all -R .note -R .comment $(BIN_PATH)/$(BIN_NAME)
 
-# Main rule, checks the executable and symlinks to the output
+# Main rule, symlinks to the output
 .PHONY: main
 main: $(BIN_PATH)/$(BIN_NAME)
 	@echo "Making symlink: $(BIN_NAME) -> $< ..."
