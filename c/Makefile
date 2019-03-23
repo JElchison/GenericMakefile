@@ -27,10 +27,14 @@ COMPILE_FLAGS = -std=$(CSTD) -Wall -Wextra -Werror -pedantic \
 BIT64_COMPILE_FLAGS = -m64
 # 32-bit compiler flags
 BIT32_COMPILE_FLAGS = -m32
+# Additional dynamic-link settings
+DYNAMIC_COMPILE_FLAGS =
+# Additional static-link settings
+STATIC_COMPILE_FLAGS =
 # Additional release-specific flags
-RCOMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto
+RELEASE_COMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto
 # Additional debug-specific flags
-DCOMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -fno-omit-frame-pointer
+DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -fno-omit-frame-pointer
 
 # General linker settings
 LINK_FLAGS =
@@ -38,10 +42,14 @@ LINK_FLAGS =
 BIT64_LINK_FLAGS = -m64
 # 32-bit linker flags
 BIT32_LINK_FLAGS = -m32
+# Additional dynamic linker settings
+DYNAMIC_LINK_FLAGS =
+# Additional static linker settings
+STATIC_LINK_FLAGS = -static
 # Additional release-specific linker settings
-RLINK_FLAGS = -s -Wl,--build-id=none -flto
+RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto
 # Additional debug-specific linker settings
-DLINK_FLAGS = -lmcheck
+DEBUG_LINK_FLAGS = -lmcheck
 #### END PROJECT SETTINGS ####
 
 # Optionally you may move the section above to a separate config.mk file, and
@@ -78,24 +86,40 @@ ifeq ($(V),true)
 endif
 
 # Combine compiler and linker flags
-64-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(RCOMPILE_FLAGS)
-64-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(RLINK_FLAGS)
-64-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DCOMPILE_FLAGS)
-64-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DLINK_FLAGS)
-32-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(RCOMPILE_FLAGS)
-32-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(RLINK_FLAGS)
-32-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DCOMPILE_FLAGS)
-32-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DLINK_FLAGS)
+64-dynamic-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
+64-dynamic-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
+64-dynamic-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
+64-dynamic-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
+64-static-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
+64-static-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
+64-static-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
+64-static-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
+32-dynamic-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
+32-dynamic-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
+32-dynamic-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
+32-dynamic-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
+32-static-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
+32-static-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
+32-static-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
+32-static-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
 
 # Build and output paths
-64-release: export BUILD_PATH := build/64/release
-64-release: export BIN_PATH := bin/64/release
-64-debug: export BUILD_PATH := build/64/debug
-64-debug: export BIN_PATH := bin/64/debug
-32-release: export BUILD_PATH := build/32/release
-32-release: export BIN_PATH := bin/32/release
-32-debug: export BUILD_PATH := build/32/debug
-32-debug: export BIN_PATH := bin/32/debug
+64-dynamic-release: export BUILD_PATH := build/64/dynamic/release
+64-dynamic-release: export BIN_PATH := bin/64/dynamic/release
+64-dynamic-debug: export BUILD_PATH := build/64/dynamic/debug
+64-dynamic-debug: export BIN_PATH := bin/64/dynamic/debug
+64-static-release: export BUILD_PATH := build/64/static/release
+64-static-release: export BIN_PATH := bin/64/static/release
+64-static-debug: export BUILD_PATH := build/64/static/debug
+64-static-debug: export BIN_PATH := bin/64/static/debug
+32-dynamic-release: export BUILD_PATH := build/32/dynamic/release
+32-dynamic-release: export BIN_PATH := bin/32/dynamic/release
+32-dynamic-debug: export BUILD_PATH := build/32/dynamic/debug
+32-dynamic-debug: export BIN_PATH := bin/32/dynamic/debug
+32-static-release: export BUILD_PATH := build/32/static/release
+32-static-release: export BIN_PATH := bin/32/static/release
+32-static-debug: export BUILD_PATH := build/32/static/debug
+32-static-debug: export BIN_PATH := bin/32/static/debug
 
 # Find all source files in the source directory, sorted by most
 # recently modified
@@ -164,10 +188,10 @@ ifeq ($(shell git describe --always > /dev/null 2>&1 ; echo $$?), 0)
 	endif
 endif
 
-# 64-bit release build
-.PHONY: 64-release
-64-release: dirs
-	@echo "Beginning 64-bit release build $(VERSION)..."
+# 64-bit dynamic release build
+.PHONY: 64-dynamic-release
+64-dynamic-release: dirs
+	@echo "Beginning 64-bit dynamic release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
@@ -175,10 +199,21 @@ endif
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
-# 64-bit debug build
-.PHONY: 64-debug
-64-debug: dirs
-	@echo "Beginning 64-bit debug build $(VERSION)..."
+# 64-bit static release build
+.PHONY: 64-static-release
+64-static-release: dirs
+	@echo "Beginning 64-bit static release build $(VERSION)..."
+	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
+	@$(MAKE) main --no-print-directory
+	@$(MAKE) strip --no-print-directory
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 64-bit dynamic debug build
+.PHONY: 64-dynamic-debug
+64-dynamic-debug: dirs
+	@echo "Beginning 64-bit dynamic debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
@@ -186,10 +221,21 @@ endif
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
-# 32-bit release build
-.PHONY: 32-release
-32-release: dirs
-	@echo "Beginning 32-bit release build $(VERSION)..."
+# 64-bit static debug build
+.PHONY: 64-static-debug
+64-static-debug: dirs
+	@echo "Beginning 64-bit static debug build $(VERSION)..."
+	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
+	@$(MAKE) main --no-print-directory
+	@# no call to 'strip' target for debug builds
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 32-bit dynamic release build
+.PHONY: 32-dynamic-release
+32-dynamic-release: dirs
+	@echo "Beginning 32-bit dynamic release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
@@ -197,10 +243,32 @@ endif
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
-# 32-bit debug build
-.PHONY: 32-debug
-32-debug: dirs
-	@echo "Beginning 32-bit debug build $(VERSION)..."
+# 32-bit static release build
+.PHONY: 32-static-release
+32-static-release: dirs
+	@echo "Beginning 32-bit static release build $(VERSION)..."
+	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
+	@$(MAKE) main --no-print-directory
+	@$(MAKE) strip --no-print-directory
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 32-bit dynamic debug build
+.PHONY: 32-dynamic-debug
+32-dynamic-debug: dirs
+	@echo "Beginning 32-bit dynamic debug build $(VERSION)..."
+	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
+	@$(MAKE) main --no-print-directory
+	@# no call to 'strip' target for debug builds
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 32-bit static debug build
+.PHONY: 32-static-debug
+32-static-debug: dirs
+	@echo "Beginning 32-bit static debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
