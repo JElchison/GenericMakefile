@@ -226,7 +226,7 @@ clean:
 
 .PHONY: indent
 indent:
-	@indent -kr $(SOURCES)
+	$(CMD_PREFIX)indent -kr $(SOURCES)
 
 # Strip the binary, including the .comment section which normally contains the GCC version
 .PHONY: strip
@@ -263,4 +263,4 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 
 .PHONY: check
 check:
-	@cppcheck --enable=all --std=$(CSTD) .
+	$(CMD_PREFIX)cppcheck --enable=all --std=$(CSTD) $(INCLUDES) . | grep -v 'cannot find all the include files'
