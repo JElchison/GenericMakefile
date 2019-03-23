@@ -171,6 +171,7 @@ endif
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
+	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -181,6 +182,7 @@ endif
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
+	@# no call to 'strip' target for debug builds
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -191,6 +193,7 @@ endif
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
+	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -201,6 +204,7 @@ endif
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
+	@# no call to 'strip' target for debug builds
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -219,6 +223,11 @@ clean:
 	@echo "Deleting directories"
 	@$(RM) -r build
 	@$(RM) -r bin
+
+# Strip the binary, including the .comment section which normally contains the GCC version
+.PHONY: strip
+strip:
+	$(CMD_PREFIX)strip --strip-all -R .note -R .comment $(BIN_PATH)/$(BIN_NAME)
 
 # Main rule, checks the executable and symlinks to the output
 .PHONY: main
