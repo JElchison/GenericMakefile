@@ -1,9 +1,8 @@
 GenericMakefile
 ===============
 
-A generic makefile for use with small/medium C projects. Allows for
-easy project setup without the need to create tedious build rules or
-dependency lists. The c directory contains a makefile configured for C.
+A generic makefile for use with C projects. Allows for easy project setup without the need to create tedious build rules or
+dependency lists. Release builds produce size-optimized binaries.
 
 ## Features
 * Automatically finds and compiles all source files within the source directory.
