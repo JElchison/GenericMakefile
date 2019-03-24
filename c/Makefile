@@ -200,17 +200,6 @@ endif
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
-# 64-bit static release build
-.PHONY: 64-static-release
-64-static-release: dirs
-	@echo "Beginning 64-bit static release build $(VERSION)..."
-	@$(START_TIME)
-	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
-	@$(MAKE) strip --no-print-directory
-	@echo -n "Total build time: "
-	@$(END_TIME)
-
 # 64-bit dynamic debug build
 .PHONY: 64-dynamic-debug
 64-dynamic-debug: dirs
@@ -219,6 +208,17 @@ endif
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
 	@# no call to 'strip' target for debug builds
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 64-bit static release build
+.PHONY: 64-static-release
+64-static-release: dirs
+	@echo "Beginning 64-bit static release build $(VERSION)..."
+	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
+	@$(MAKE) main --no-print-directory
+	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
@@ -244,17 +244,6 @@ endif
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
-# 32-bit static release build
-.PHONY: 32-static-release
-32-static-release: dirs
-	@echo "Beginning 32-bit static release build $(VERSION)..."
-	@$(START_TIME)
-	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
-	@$(MAKE) strip --no-print-directory
-	@echo -n "Total build time: "
-	@$(END_TIME)
-
 # 32-bit dynamic debug build
 .PHONY: 32-dynamic-debug
 32-dynamic-debug: dirs
@@ -263,6 +252,17 @@ endif
 	@$(MAKE) check --no-print-directory
 	@$(MAKE) main --no-print-directory
 	@# no call to 'strip' target for debug builds
+	@echo -n "Total build time: "
+	@$(END_TIME)
+
+# 32-bit static release build
+.PHONY: 32-static-release
+32-static-release: dirs
+	@echo "Beginning 32-bit static release build $(VERSION)..."
+	@$(START_TIME)
+	@$(MAKE) check --no-print-directory
+	@$(MAKE) main --no-print-directory
+	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
