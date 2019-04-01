@@ -295,7 +295,7 @@ clean:
 
 .PHONY: indent
 indent:
-	$(CMD_PREFIX)indent -kr $(SOURCES)
+	$(CMD_PREFIX)indent -kr -nut $(SOURCES)
 
 # Strip the binary, including the .comment section which normally contains the GCC version
 .PHONY: strip
