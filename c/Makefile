@@ -35,7 +35,7 @@ STATIC_COMPILE_FLAGS =
 # Additional release-specific flags
 RELEASE_COMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto
 # Additional debug-specific flags
-DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -fno-omit-frame-pointer
+DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer
 
 # General linker settings
 LINK_FLAGS =
