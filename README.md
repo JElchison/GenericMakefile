@@ -24,6 +24,7 @@ dependency lists. Release builds produce size-optimized binaries.
 * Customizable compiler/linker flags for each of the build targets.  Sensible defaults baked in optimizing for size.
 * Post-build step to strip symbols from release binaries.
 * Incorporates calls to `cppcheck` as a build prerequisite.  Also available as `check` target.
+* Incorporates `scan-build` when available for additional static analysis.
 * Optional `indent` target for style/whitespace conformity.  Defaults to K&R, but with spaces instead of tabs and allowing 120-character lines.
 
 ### Versioning
