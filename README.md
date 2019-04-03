@@ -8,7 +8,7 @@ dependency lists. Release builds produce size-optimized binaries.
 * Automatically finds and compiles all source files within the source directory.
 * Compiles most recently modified files first, to hopefully find problems earlier.
 * Automatically generates dependencies as files are compiled, ensuring that files are correctly recompiled when dependencies have updated.
-* Includes configurations for normal (release) build and debug build suitable for GDB debugging.
+* Includes configurations for normal (release) build and debug build suitable for GDB debugging or profiling.  Debug builds include applicable GCC sanitizers.
 * Times the compilation of each file and the entire build.
 * Generates version numbers based on git tags (see below), which are passed the compiler as preprocessor macros (in debug mode).
 * By default, builds in a "quiet" mode that only lists the actions being performed. By passing `V=true` to make, you can compile in verbose mode to see the full compiler commands being issued.
