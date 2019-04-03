@@ -283,13 +283,21 @@ endif
 .PHONY: all
 all:
 	@$(MAKE) 64-dynamic-release --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 64-dynamic-debug --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 64-static-release --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 64-static-debug --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 32-dynamic-release --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 32-dynamic-debug --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 32-static-release --no-print-directory
+	@echo ================================================================================
 	@$(MAKE) 32-static-debug --no-print-directory
+	@echo ================================================================================
 	@echo "Deleting $(BIN_NAME) symlink ..."
 	@$(RM) $(BIN_NAME)
 
