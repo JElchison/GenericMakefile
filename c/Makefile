@@ -35,7 +35,7 @@ STATIC_COMPILE_FLAGS =
 # Additional release-specific flags
 RELEASE_COMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto -fno-sanitize=all
 # Additional debug-specific flags
-DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check -fstack-clash-protection
+DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check
 
 # General linker settings
 LINK_FLAGS =
@@ -50,7 +50,7 @@ STATIC_LINK_FLAGS = -static
 # Additional release-specific linker settings
 RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto -ffunction-sections -fdata-sections -Wl,--gc-sections -fno-sanitize=all
 # Additional debug-specific linker settings
-DEBUG_LINK_FLAGS = -lmcheck -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check -fstack-clash-protection
+DEBUG_LINK_FLAGS = -lmcheck -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check
 #### END PROJECT SETTINGS ####
 
 # Optionally you may move the section above to a separate config.mk file, and
@@ -89,16 +89,16 @@ endif
 # Combine compiler and linker flags
 64-dynamic-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
 64-dynamic-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
-64-dynamic-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
-64-dynamic-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
+64-dynamic-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS) -fsanitize=address -fsanitize=leak
+64-dynamic-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS) -fsanitize=address -fsanitize=leak
 64-static-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
 64-static-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
-64-static-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
-64-static-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
+64-static-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT64_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS) -fsanitize=leak
+64-static-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT64_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS) -fsanitize=leak
 32-dynamic-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
 32-dynamic-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
-32-dynamic-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
-32-dynamic-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS)
+32-dynamic-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(DYNAMIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS) -fsanitize=address
+32-dynamic-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(DYNAMIC_LINK_FLAGS) $(DEBUG_LINK_FLAGS) -fsanitize=address
 32-static-release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(RELEASE_COMPILE_FLAGS)
 32-static-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(BIT32_LINK_FLAGS) $(STATIC_LINK_FLAGS) $(RELEASE_LINK_FLAGS)
 32-static-debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(BIT32_COMPILE_FLAGS) $(STATIC_COMPILE_FLAGS) $(DEBUG_COMPILE_FLAGS)
