@@ -36,6 +36,11 @@ Tags should be made in the format `vMAJOR.MINOR.PATCH[-description]`, where `MAJ
 
 If the makefile is not used in a git repository, or is in a repository with no tags, the version macros are not created.
 
+## External Requirements
+* `cppcheck`
+* `indent` (optional)
+* `scan-build` (optional)
+
 ## Limitations
 * Assumes GNU make.
 * Timing does not work correctly with MacOS. See [issue #6](https://github.com/mbcrawfo/GenericMakefile/issues/6) for a workaround patch that allows timing in seconds on Mac.

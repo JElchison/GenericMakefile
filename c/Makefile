@@ -6,6 +6,8 @@ CC = gcc
 # C standard
 CSTD_GCC = gnu11
 CSTD_CPPCHECK = c11
+# comment out if no scan-build installed
+SCAN_BUILD = scan-build
 # Extension of source files used in the project
 SRC_EXT = c
 # Path to the source directory, relative to the makefile
@@ -195,7 +197,7 @@ endif
 	@echo "Beginning 64-bit dynamic release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -206,7 +208,7 @@ endif
 	@echo "Beginning 64-bit dynamic debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@# no call to 'strip' target for debug builds
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -217,7 +219,7 @@ endif
 	@echo "Beginning 64-bit static release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -228,7 +230,7 @@ endif
 	@echo "Beginning 64-bit static debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@# no call to 'strip' target for debug builds
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -239,7 +241,7 @@ endif
 	@echo "Beginning 32-bit dynamic release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -250,7 +252,7 @@ endif
 	@echo "Beginning 32-bit dynamic debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@# no call to 'strip' target for debug builds
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -261,7 +263,7 @@ endif
 	@echo "Beginning 32-bit static release build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@$(MAKE) strip --no-print-directory
 	@echo -n "Total build time: "
 	@$(END_TIME)
@@ -272,7 +274,7 @@ endif
 	@echo "Beginning 32-bit static debug build $(VERSION)..."
 	@$(START_TIME)
 	@$(MAKE) check --no-print-directory
-	@$(MAKE) main --no-print-directory
+	@$(SCAN_BUILD) $(MAKE) main --no-print-directory
 	@# no call to 'strip' target for debug builds
 	@echo -n "Total build time: "
 	@$(END_TIME)
