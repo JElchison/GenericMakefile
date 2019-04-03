@@ -277,6 +277,20 @@ endif
 	@echo -n "Total build time: "
 	@$(END_TIME)
 
+# convenience target to build all targets
+.PHONY: all
+all:
+	@$(MAKE) 64-dynamic-release --no-print-directory
+	@$(MAKE) 64-dynamic-debug --no-print-directory
+	@$(MAKE) 64-static-release --no-print-directory
+	@$(MAKE) 64-static-debug --no-print-directory
+	@$(MAKE) 32-dynamic-release --no-print-directory
+	@$(MAKE) 32-dynamic-debug --no-print-directory
+	@$(MAKE) 32-static-release --no-print-directory
+	@$(MAKE) 32-static-debug --no-print-directory
+	@echo "Deleting $(BIN_NAME) symlink ..."
+	@$(RM) $(BIN_NAME)
+
 # Create the directories used in the build
 .PHONY: dirs
 dirs:
