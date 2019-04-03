@@ -33,9 +33,9 @@ DYNAMIC_COMPILE_FLAGS =
 # Additional static-link settings
 STATIC_COMPILE_FLAGS =
 # Additional release-specific flags
-RELEASE_COMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto
+RELEASE_COMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto -fno-sanitize=all
 # Additional debug-specific flags
-DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer
+DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check -fstack-clash-protection
 
 # General linker settings
 LINK_FLAGS =
@@ -48,9 +48,9 @@ DYNAMIC_LINK_FLAGS =
 # Additional static linker settings
 STATIC_LINK_FLAGS = -static
 # Additional release-specific linker settings
-RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto -ffunction-sections -fdata-sections -Wl,--gc-sections
+RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto -ffunction-sections -fdata-sections -Wl,--gc-sections -fno-sanitize=all
 # Additional debug-specific linker settings
-DEBUG_LINK_FLAGS = -lmcheck
+DEBUG_LINK_FLAGS = -lmcheck -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check -fstack-clash-protection
 #### END PROJECT SETTINGS ####
 
 # Optionally you may move the section above to a separate config.mk file, and
