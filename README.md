@@ -44,6 +44,10 @@ If the makefile is not used in a git repository, or is in a repository with no t
   extension of files to be excluded, or use preprocessor flags for
   conditional compilation.
 
+## Protips
+* Use `scan-build make` for additional static analysis
+
 ## Thanks to
 * My friend Jay and people on Stack Overflow for help with regex to parse the version info.
 * The residents of [/r/programming](https://www.reddit.com/r/programming/) for suggesting numerous tweaks and improvements.
+* Josh, for his review and suggestions!
