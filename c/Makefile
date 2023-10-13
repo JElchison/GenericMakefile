@@ -37,7 +37,7 @@ STATIC_COMPILE_FLAGS =
 # Additional release-specific flags
 RELEASE_COMPILE_FLAGS = -D NDEBUG -Os -fno-ident -flto -fno-sanitize=all
 # Additional debug-specific flags
-DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check
+DEBUG_COMPILE_FLAGS = -D DEBUG -O0 -fident -ggdb3 -pg -fno-omit-frame-pointer -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-clash-protection
 
 # General linker settings
 LINK_FLAGS =
