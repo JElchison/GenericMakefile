@@ -356,4 +356,4 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 
 .PHONY: check
 check:
-	$(CMD_PREFIX)cppcheck --enable=all --suppress=missingIncludeSystem --std=$(CSTD_CPPCHECK) $(INCLUDES) .
+	$(CMD_PREFIX)cppcheck --enable=all --suppress=missingIncludeSystem --std=$(CSTD_CPPCHECK) $(INCLUDES) $(SRC_PATH)
