@@ -3,6 +3,7 @@
 BIN_NAME := hello
 # Compiler used
 CC = gcc
+STRIP = strip
 # C standard
 CSTD_GCC = gnu11
 CSTD_CPPCHECK = c11
@@ -324,7 +325,7 @@ indent:
 # Strip the binary, including the .comment section which normally contains the GCC version
 .PHONY: strip
 strip:
-	$(CMD_PREFIX)strip --strip-all -R .note -R .comment $(BIN_PATH)/$(BIN_NAME)
+	$(CMD_PREFIX)$(STRIP) --strip-all -R .note -R .comment $(BIN_PATH)/$(BIN_NAME)
 
 # Main rule, symlinks to the output
 .PHONY: main
