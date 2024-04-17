@@ -51,7 +51,7 @@ DYNAMIC_LINK_FLAGS =
 # Additional static linker settings
 STATIC_LINK_FLAGS = -static
 # Additional release-specific linker settings
-RELEASE_LINK_FLAGS = -s -Wl,--build-id=none -flto -ffunction-sections -fdata-sections -Wl,--gc-sections -fno-sanitize=all
+RELEASE_LINK_FLAGS = -Os -s -Wl,--build-id=none -flto -ffunction-sections -fdata-sections -Wl,--gc-sections -fno-sanitize=all
 # Additional debug-specific linker settings
 DEBUG_LINK_FLAGS = -lmcheck -fsanitize=undefined -fsanitize-address-use-after-scope -fstack-protector-all -fstack-protector-strong -fstack-check
 #### END PROJECT SETTINGS ####
